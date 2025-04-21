@@ -7,7 +7,7 @@ try:
 	file = open('modified.txt', "w")
 	file.write(modified_data)
 
-	file.close()
+	file.close
 
 	print("The file was read, modified, and saved successfully.")
 

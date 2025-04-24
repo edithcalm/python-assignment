@@ -1,35 +1,56 @@
-def modify_line(line):
-    # Example modification: convert text to uppercase
-    return line.upper()
+# Step 1: Define a function to read from a file
+def read_file(filename):
+    try:
+        with open(filename, 'r') as file:  # Open the file in read mode
+            content = file.read()         # Read the entire file content
+        return content                    # Return the content
+    except FileNotFoundError:
+        print(f" Error: The file '{filename}' was not found.")
+        return None
+    except IOError:
+        print(f" Error: Could not read the file '{filename}'.")
+        return None
 
+
+# Step 2: Define a function to modify the content
+def modify_content(content):
+    # Example modification: Convert content to uppercase and add a header
+    modified = "=== Modified File Content ===\n" + content.upper()
+    return modified
+
+
+# Step 3: Define a function to write to a new file
+def write_to_file(new_filename, content):
+    try:
+        with open(new_filename, 'w') as file:  # Open the new file in write mode
+            file.write(content)               # Write modified content to the file
+        return True
+    except IOError:
+        print(f" Error: Could not write to the file '{new_filename}'.")
+        return False
+
+
+# Step 4: Main program logic to call the functions in sequence
 def main():
-    input_file = input("Enter the name of the file to read from: ")
+    # Ask the user to input the filename
+    original_filename = input("Enter the name of the file to read: ")
+
+    # Step 4.1: Read the file
+    content = read_file(original_filename)
+    if content is None:
+        return  # Exit if file couldn't be read
+
+    # Step 4.2: Modify the content
+    modified = modify_content(content)
+
+    # Step 4.3: Ask for the output filename
+    new_filename = input("Enter the name for the new file to save modified content: ")
+
+    # Step 4.4: Write to the new file
+    if write_to_file(new_filename, modified):
+        print(f" Success! Modified content has been saved to '{new_filename}'.")
 
 
-try:
-	file = open('data.txt',"r")
-	data = file.read()
-	file.close()
-
-	modified_data = data.upper()
-	file = open('modified.txt', "w")
-	file.write(modified_data)
-
-	file.close
-
-	print("The file was read, modified, and saved successfully.")
-
-except FileNotFoundError:
-	print("Oops! The file 'data.txt' was not found.")
-
-filename = input("Enter the name of the file you want to read: ")
-try:
-	file = open("filename", "r")
-	print("\n:Here is the content of the file:")
-	print(file.read())
-	file.close()
-except FileNotFoundError:
-    print("Sorry, that file does not exist. Please check the name and try again.")
-except Exception as error:
-    print(f"Something went wrong: {error}")
-
+# Step 5: Run the program
+if __name__ == "__main__":
+    main()

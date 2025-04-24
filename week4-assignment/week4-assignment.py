@@ -1,5 +1,13 @@
+def modify_line(line):
+    # Example modification: convert text to uppercase
+    return line.upper()
+
+def main():
+    input_file = input("Enter the name of the file to read from: ")
+
+
 try:
-	file = open('data.txt', "r")
+	file = open('data.txt',"r")
 	data = file.read()
 	file.close()
 

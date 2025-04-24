@@ -1,6 +1,6 @@
 # Step 1: Define a function to read from a file
-def read_file(input.txt):
-    filename = input.txt  # The name of the file to read
+def read_file(filename):
+    filename = filename  # The name of the file to read
     try:
         with open(filename, 'r') as file:  # Open the file in read mode
             content = file.read()         # Read the entire file content
